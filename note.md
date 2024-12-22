@@ -1,0 +1,1 @@
+Using depth 24 for xcb_put_image, which I don't know the meaning.

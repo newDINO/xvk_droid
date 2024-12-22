@@ -1,0 +1,4 @@
+[workspace]
+
+resolver = "2"
+members = [ "code_gen", "vulkan_core","vulkan"]
