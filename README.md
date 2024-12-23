@@ -7,11 +7,14 @@ Proved viable (Successfully tested on simple programs).
 ### Tests
 #### Programs
 - [x] xcb hello triangle
-- [x] GLFW hello trangle
+- [x] GLFW hello triangle
 - [x] vkcube
-- [] vkmark (Require mailbox swapchain support)
+- [x] vkmark (~900 FPS on SD8Gen3)
+- [] gears (Via zink, only shows the red gear)
+- [] glmark2 (Via zink, can't finish the benchmark, crash in the middle of it, error: `ralloc_header *get_header(const void *): assertion "info->canary == CANARY" failed`. ~350-400 FPS on SD8Gen3)
+- [] firefox (Only 4 FPS in WebGL Samples Aquarium)
+- [] chromium (Can use vulkan when enabling Vulkan flag. Can't use OpenGL provide by zink. Can't run WebGL samples or WebGPU samples. Can't create vkCreateInstance)
 - [] box64 wine dxvk
-- [] zink
 - [] wgpu programs
 
 ### TODO
@@ -70,5 +73,10 @@ export LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
 For example:
 ```
 export LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
-vkcube
+vkmark
+```
+vkmark is in the tur-repo, to install it, run:
+```
+pkg i tur-repo
+pkg i vkmark
 ```

@@ -9,19 +9,21 @@ use vulkan_core::{PFN_vkVoidFunction, VkInstanceCreateInfo, VkMemoryHeap, VkMemo
 use crate::pfn::{VK_CREATE_INSTANCE, VK_DESTROY_INSTANCE, VK_ENUMERATE_PHYSICAL_DEVICES, VK_GET_PHYSICAL_DEVICE_MEMORY_PROPERTIES, VK_GET_PHYSICAL_DEVICE_QUEUE_FAMILY_PROPERTIES};
 
 mod utils;
+pub use utils::*;
 
 // Unchanged functions
 mod invarient;
 // Hijacked functions
 mod vk_xcb;
-use vk_xcb::*;
+pub use vk_xcb::*;
 mod instance;
 use instance::*;
 mod physical_device;
 use physical_device::*;
 mod device;
 use device::*;
-const ALLOC_NOT_SUPPORT: &str = "xcb_droid: Custom allocator currently not supported";
+
+pub const ALLOC_NOT_SUPPORT: &str = "xcb_droid: Custom allocator currently not supported";
 const XCB_EXT_NAME: &CStr = c"VK_KHR_xcb_surface";
 
 
@@ -51,12 +53,12 @@ static HIJACKED_FNS: LazyLock<HashMap<&CStr, PFN_vkVoidFunction>> = LazyLock::ne
     ])
 });
 
-struct Inits {
-    present_queue_family: u32,
-    memory_properties: VkPhysicalDeviceMemoryProperties,
+pub struct Inits {
+    pub present_queue_family: u32,
+    pub memory_properties: VkPhysicalDeviceMemoryProperties,
 }
 
-static mut INITS: Inits = Inits {
+pub static mut INITS: Inits = Inits {
     present_queue_family: 0,
     memory_properties: VkPhysicalDeviceMemoryProperties {
         memoryHeapCount: 0,

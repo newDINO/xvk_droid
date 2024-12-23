@@ -1,4 +1,4 @@
-use vulkan_core::{VkBool32, VkColorSpaceKHR_VK_COLORSPACE_SRGB_NONLINEAR_KHR, VkCompositeAlphaFlagBitsKHR_VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR, VkExtent2D, VkFormat_VK_FORMAT_B8G8R8A8_SRGB, VkPhysicalDevice, VkPresentModeKHR, VkPresentModeKHR_VK_PRESENT_MODE_FIFO_KHR, VkResult, VkResult_VK_INCOMPLETE, VkResult_VK_SUCCESS, VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceKHR, VkSurfaceTransformFlagBitsKHR_VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR};
+use vulkan_core::{VkBool32, VkColorSpaceKHR_VK_COLORSPACE_SRGB_NONLINEAR_KHR, VkCompositeAlphaFlagBitsKHR_VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR, VkExtent2D, VkFormat_VK_FORMAT_B8G8R8A8_SRGB, VkPhysicalDevice, VkPresentModeKHR, VkPresentModeKHR_VK_PRESENT_MODE_FIFO_KHR, VkPresentModeKHR_VK_PRESENT_MODE_MAILBOX_KHR, VkResult, VkResult_VK_INCOMPLETE, VkResult_VK_SUCCESS, VkSurfaceCapabilitiesKHR, VkSurfaceFormatKHR, VkSurfaceKHR, VkSurfaceTransformFlagBitsKHR_VK_SURFACE_TRANSFORM_IDENTITY_BIT_KHR};
 
 use super::{VkIcdSurfaceBase, INITS, VK_ICD_WSI_PLATFORM_XCB};
 
@@ -21,7 +21,7 @@ pub unsafe extern "C" fn vkGetPhysicalDeviceSurfaceSupportKHR(
 
 pub const SURFACE_CAP: VkSurfaceCapabilitiesKHR = VkSurfaceCapabilitiesKHR {
     minImageCount: 1,
-    maxImageCount: 1,
+    maxImageCount: 3,
     currentExtent: VkExtent2D {
         width: 0xFFFFFFFF,
         height: 0xFFFFFFFF,
@@ -44,7 +44,10 @@ const SURFACE_FORMATS: [VkSurfaceFormatKHR; 1] = [VkSurfaceFormatKHR {
     format: VkFormat_VK_FORMAT_B8G8R8A8_SRGB,
     colorSpace: VkColorSpaceKHR_VK_COLORSPACE_SRGB_NONLINEAR_KHR,
 }];
-pub const SURFACE_MODES: [u32; 1] = [VkPresentModeKHR_VK_PRESENT_MODE_FIFO_KHR];
+pub const SURFACE_MODES: [u32; 2] = [
+    VkPresentModeKHR_VK_PRESENT_MODE_MAILBOX_KHR,
+    VkPresentModeKHR_VK_PRESENT_MODE_FIFO_KHR
+];
 
 #[no_mangle]
 pub unsafe extern "C" fn vkGetPhysicalDeviceSurfaceCapabilitiesKHR(
@@ -115,8 +118,9 @@ pub unsafe extern "C" fn vkGetPhysicalDeviceSurfacePresentModesKHR(
         VkResult_VK_SUCCESS
     } else {
         let given_count = *pPresentModeCount as usize;
-        let modes = std::slice::from_raw_parts_mut(pPresentModes, given_count);
-        modes.copy_from_slice(&SURFACE_MODES[..given_count]);
+        let count = given_count.min(SURFACE_MODES.len());
+        let modes = std::slice::from_raw_parts_mut(pPresentModes, count);
+        modes.copy_from_slice(&SURFACE_MODES[..count]);
         if given_count < SURFACE_MODES.len() {
             VkResult_VK_INCOMPLETE
         } else {

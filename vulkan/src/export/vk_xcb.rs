@@ -39,7 +39,6 @@ pub unsafe extern "C" fn vkCreateXcbSurfaceKHR(
     pAllocator: *const VkAllocationCallbacks,
     surface: *mut VkSurfaceKHR,
 ) -> VkResult {
-    println!("XVK: Creating surface");
     if !pAllocator.is_null() {
         println!("{ALLOC_NOT_SUPPORT}");
     }

@@ -161,7 +161,12 @@ int main() {
     }
 
     // logical device and queue
-    int queueCount = 2;
+    int queueCount;
+    if (graphicsFamily == presentFamily) {
+        queueCount = 1;
+    } else {
+        queueCount = 2;
+    }
     uint32_t family_indices[] = {graphicsFamily, presentFamily};
     VkDeviceQueueCreateInfo queueCreateInfos[queueCount];
     float queuePriority = 1.0;
@@ -196,7 +201,7 @@ int main() {
         .sType=VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO,
         .pNext=NULL,
         .flags=0,
-        .queueCreateInfoCount=2,
+        .queueCreateInfoCount=queueCount,
         .pQueueCreateInfos=queueCreateInfos,
         .enabledLayerCount=0,
         .ppEnabledLayerNames=NULL,
@@ -530,11 +535,12 @@ int main() {
     bool running = true;
     int frameCount = 0;
     while (running) {
-        xcb_generic_event_t* event = xcb_wait_for_event(connection);
+        xcb_generic_event_t* event = xcb_poll_for_event(connection);
         // Waiting for the previous frame
         vkWaitForFences(device, 1, &inFlightFence, VK_TRUE, UINT64_MAX);
         vkResetFences(device, 1, &inFlightFence);
 
+        
         // Acquiring an image from the swap chain
         uint32_t imageIndex;
         if (vkAcquireNextImageKHR(device, swapChain, UINT64_MAX, imageAvailableSemaphore, VK_NULL_HANDLE, &imageIndex) != VK_SUCCESS) {

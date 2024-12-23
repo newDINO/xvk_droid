@@ -9,21 +9,6 @@ create_link:
 	ln -s target/release/libvulkan.so libvulkan.so
 	ln -s target/release/libvulkan.so libvulkan.so.1
 
-TEST_SRC = c_test/main.c
-
-test: $(TEST_SRC)
-	mkdir -p $(TARGET_DIR)
-	$(CC) $(TEST_SRC) $(CFLAGS) -lvulkan -lglfw -o $(TARGET_DIR)/test_bin
-
-run_test: $(SYM_LINKS)
-	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) ./$(TARGET_DIR)/test_bin
-
-vkmark:
-	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vkmark
-
-vkcube:
-	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vkcube
-
 SAMPLE_SRC = c_test/sample.c
 
 sample: $(SMAPLE_SRC)
@@ -41,3 +26,34 @@ xv: $(XV_SRC)
 
 run_xv: $(SYM_LINKS)
 	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) ./$(TARGET_DIR)/xv
+
+TEST_SRC = c_test/main.c
+
+test: $(TEST_SRC)
+	mkdir -p $(TARGET_DIR)
+	$(CC) $(TEST_SRC) $(CFLAGS) -lvulkan -lglfw -o $(TARGET_DIR)/test_bin
+
+run_test: $(SYM_LINKS)
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) ./$(TARGET_DIR)/test_bin
+
+vkcube:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vkcube
+
+vkmark:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vkmark
+
+glmark2:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) glmark2
+
+firefox:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) firefox
+
+gears:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) gears
+
+code-oss:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) code-oss
+
+chromium:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) chromium-browser
+	
