@@ -36,6 +36,9 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 
 ### How to use the program
 
+#### Using pre-built binary
+You can get it at the [release page](https://github.com/newDINO/xvk_droid/releases).
+
 #### Build the program
 Requirement: `rust`
 
