@@ -1,5 +1,5 @@
 [package]
-name = "vulkan"
+name = "xvk_droid"
 version = "0.1.0"
 edition = "2021"
 
@@ -9,3 +9,4 @@ crate-type = ["cdylib"]
 [dependencies]
 vulkan_core = { path = "../vulkan_core" }
 xcb = "*"
+ctor = "*"

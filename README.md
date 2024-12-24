@@ -13,18 +13,18 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 
 - ✅ xcb hello triangle
 - ✅ GLFW hello triangle
-- ✅ vkcube
+- ✅ vkcube (Currently only support BGRA_SRGB surface format, not prefered by vkcube)
 - ✅ vkmark (~900 FPS on SD8Gen3)
-- 🛠️ gears (Via zink, only shows the red gear, ~400-500 FPS on SD8Gen3)
-- 🛠️ glmark2 (Via zink, can't finish the benchmark, crash in the middle of it, error: `ralloc_header *get_header(const void *): assertion "info->canary == CANARY" failed`. ~350-400 FPS on SD8Gen3)
+- 🛠️ gears (Only shows the red gear's first face)
+- 🛠️ glmark2 (Can't finish the benchmark, crash in the middle of it, error: `ralloc_header *get_header(const void *): assertion "info->canary == CANARY" failed`. ~350-400 FPS on SD8Gen3)
 - 🛠️ firefox (Only 4 FPS in WebGL Samples Aquarium)
 - 🛠️ chromium (When enabling vulkan flag: in chome://gpu, vulkan info shows it is using xvk_droid, but dawn is using the original vulkan loader)
 - ⏹️ Minecraft (Require compiling OpenJFX for termux)
 - ⏹️ box64 wine dxvk
-- ⏹️ wgpu programs (Winit is assuming termux an android environment)
+- ⏹️ wgpu programs (winit is assuming termux an android environment)
 
 ### TODO
-- Support untested programs in the list above.
+- Support test programs listed above.
 - Provide prebuilt binaries and make it a deb package.
 - Publish to Termux repo.
 - Make it an ICD driver to support coexisting with other vulkan drivers.
@@ -33,24 +33,24 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 ### How to use the program
 
 #### Build the program
-Requirement: rust
+Requirement: `rust`
 
 Run in the repository:  
 ```
-cargo build -r -p vulkan
+cargo build -r -p xvk_droid
 ```  
-The resulting library will be `target/release/libvulkan.so`
+The resulting library will be `target/release/libxvk_droid.so`
 
 #### Use the program to replace the default libvulkan
 
-Run in the repository if you have make installed:  
+Run in the repository:  
 ```
 make create_link
 ```
-Or run
+if you have `make` installed, or run
 ```
-ln -s target/release/libvulkan.so libvulkan.so
-ln -s target/release/libvulkan.so libvulkan.so.1
+ln -s target/release/libxvk_droid.so libvulkan.so
+ln -s target/release/libxvk_droid.so libvulkan.so.1
 ```
 if you don't.  
 
@@ -58,7 +58,7 @@ This will create symbolic links to the library in the root of the repository, th
 1. for convenience  
 2. GLFW load `libvulkan.so.1` rather than libvulkan.so. We need to create an additional `libvulkan.so.1` for programs using GLFW to work.
 
-To run program using the `libvulkan.so` provided by this project. Run  
+To run program using the xvk_droid. Run  
 ```
 LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH program_name
 ```  
@@ -69,10 +69,10 @@ LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH vkcube
 ```  
 vkcube can be installed using  
 ```
-pkg install vulkan-tools
+pkg i vulkan-tools
 ```
 
-Or you can export envirenment variables to use this library to run all the program in the this shell.  
+Or you can export envirenment variables to use xvk_droid to run all the program in the this shell.  
 ```
 export LD_LIBRARY_PATH=$PWD:$LD_LIBRARY_PATH
 ```  
@@ -80,7 +80,7 @@ Or using
 ```
 . set_env.sh
 ```
-for convenience. Afterwards all the program ran in the same shell will use this library as the vulkan implementation.
+for convenience. Afterwards the programs ran in the same shell will use xvk_droid as the vulkan implementation.
 For example:
 ```
 . set_env.sh

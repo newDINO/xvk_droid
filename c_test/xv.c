@@ -562,7 +562,7 @@ int main() {
             break;
         }
         
-        VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 1.0f}}};
+        VkClearValue clearColor = {{{0.0f, 0.0f, 0.0f, 0.0f}}};
         VkRenderPassBeginInfo renderPassInfo = {
             .sType=VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO,
             .pNext=NULL,

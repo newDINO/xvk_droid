@@ -6,8 +6,8 @@ TARGET_DIR = target
 SYM_LINKS = libvulkan.so libvulkan.so.1
 
 create_link:
-	ln -s target/release/libvulkan.so libvulkan.so
-	ln -s target/release/libvulkan.so libvulkan.so.1
+	ln -s target/release/libxvk_droid.so libvulkan.so
+	ln -s target/release/libxvk_droid.so libvulkan.so.1
 
 SAMPLE_SRC = c_test/sample.c
 

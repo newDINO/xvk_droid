@@ -20,8 +20,8 @@ const SO_PATH: &CStr = c"/system/lib64/libvulkan.so";
 // const SO_PATH: &CStr = c"/data/data/com.termux/files/usr/lib/libvk_swiftshader.so";
 
 // Initiations
-#[no_mangle]
-pub unsafe extern "C" fn _init() {
+#[ctor::ctor]
+unsafe fn init_xvk() {
     println!("XVK_DROID loaded");
     let handle = dlopen(SO_PATH.as_ptr(), RTLD_NOW as i32);
     // let get_pfn = dlsym(handle, c"vkGetInstanceProcAddr".as_ptr());
