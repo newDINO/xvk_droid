@@ -1,4 +1,4 @@
-CC = clang
+CC = gcc
 
 CFLAGS = -Wall -Werror
 TARGET_DIR = target

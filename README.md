@@ -9,6 +9,7 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 #### Programs
 ✅: Works fine.  
 🛠️: Tested, but not functioning well.  
+❌: Tested, but not workding or barely working.
 ⏹️: Untested.
 
 - ✅ xcb hello triangle
@@ -17,14 +18,17 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 - ✅ vkmark (~900 FPS on SD8Gen3)
 - 🛠️ gears (Only shows the red gear's first face)
 - 🛠️ glmark2 (Can't finish the benchmark, crash in the middle of it, error: `ralloc_header *get_header(const void *): assertion "info->canary == CANARY" failed`. ~350-400 FPS on SD8Gen3)
-- 🛠️ firefox (Only 4 FPS in WebGL Samples Aquarium)
-- 🛠️ chromium (When enabling vulkan flag: in chome://gpu, vulkan info shows it is using xvk_droid, but dawn is using the original vulkan loader)
+- ❌ firefox (Only 4 FPS in WebGL Samples Aquarium)
+- ❌ chromium (When enabling vulkan flag: in chome://gpu, vulkan info shows it is using xvk_droid, but dawn is using the original vulkan loader)
+- ❌ programs inside proot-distro (When compiling using glibc, the program can't load android dynamic library, we need to compile bionic libdl to work)
+- ❌ glibc packages (Same reason as proot-distro programs)
+- ⏹️ box64 wine dxvk (need to fix glibc packages first)
 - ⏹️ Minecraft (Require compiling OpenJFX for termux)
-- ⏹️ box64 wine dxvk
-- ⏹️ wgpu programs (winit is assuming termux an android environment)
+- ⏹️ wgpu programs (winit is assuming termux an android environment and not using x11 surface)
 
 ### TODO
 - Support test programs listed above.
+- Support loading android `libvulkan.so` when compiled using glibc, so that it can be used for glibc-repo programs and proot\chroot gnu linux programs.
 - Provide prebuilt binaries and make it a deb package.
 - Publish to Termux repo.
 - Make it an ICD driver to support coexisting with other vulkan drivers.

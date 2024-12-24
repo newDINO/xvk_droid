@@ -3,6 +3,8 @@
 #define VK_USE_PLATFORM_XCB_KHR
 #include <vulkan/vk_icd.h>
 #include <stdio.h>
+#include <string.h>
+
 // Data need to be freed afterwards.
 void* readBinFile(char* path, long* size) {
     FILE* file = fopen(path, "r");
