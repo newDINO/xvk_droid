@@ -6,7 +6,7 @@ use std::fmt::Write;
 //     "vkGetPhysicalDeviceXcbPresentationSupportKHR"
 // ];
 
-const WRITEN_FNS: [&str; 16] = [
+const WRITEN_FNS: [&str; 18] = [
     "vkCreateXcbSurfaceKHR",
     "vkDestroySurfaceKHR",
     "vkGetPhysicalDeviceXcbPresentationSupportKHR",
@@ -19,6 +19,8 @@ const WRITEN_FNS: [&str; 16] = [
     "vkGetPhysicalDeviceSurfaceCapabilitiesKHR",
     "vkGetPhysicalDeviceSurfaceFormatsKHR",
     "vkGetPhysicalDeviceSurfacePresentModesKHR",
+    "vkGetPhysicalDeviceSurfaceCapabilities2KHR",
+    "vkGetPhysicalDeviceSurfaceFormats2KHR",
 
     "vkGetDeviceProcAddr",
     "vkCreateSwapchainKHR",

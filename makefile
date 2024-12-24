@@ -36,6 +36,9 @@ test: $(TEST_SRC)
 run_test: $(SYM_LINKS)
 	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) ./$(TARGET_DIR)/test_bin
 
+vulkaninfo:
+	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vulkaninfo
+
 vkcube:
 	LD_LIBRARY_PATH=$(PWD):$(LD_LIBRARY_PATH) vkcube
 

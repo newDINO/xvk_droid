@@ -7,6 +7,8 @@ mod util;
 mod fifo;
 mod mailbox;
 
+/// Currently the only difference between FIFO and MailBox is that 
+/// FIFO can't get pop image from present queue.
 pub enum SwapChain {
     MailBox(SwapChainMailBox),
     FIFO(SwapChainFIFO),
@@ -57,7 +59,7 @@ impl SwapChain {
         p_wait_semaphores: *const VkSemaphore,
     ) -> bool {
         match self {
-            Self::FIFO(swapchain) => swapchain.queue_present(queue, wait_semaphore_count, p_wait_semaphores),
+            Self::FIFO(swapchain) => swapchain.queue_present(queue, image_index, wait_semaphore_count, p_wait_semaphores),
             Self::MailBox(swapchain) => swapchain.queue_present(queue, image_index, wait_semaphore_count, p_wait_semaphores),
         }
     }

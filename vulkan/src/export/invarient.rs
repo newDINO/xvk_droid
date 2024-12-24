@@ -2668,25 +2668,6 @@ pub unsafe extern "C" fn vkReleaseProfilingLockKHR(device: VkDevice) {
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn vkGetPhysicalDeviceSurfaceCapabilities2KHR(
-    physicalDevice: VkPhysicalDevice,
-    pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR,
-    pSurfaceCapabilities: *mut VkSurfaceCapabilities2KHR,
-) -> VkResult {
-    VK_GET_PHYSICAL_DEVICE_SURFACE_CAPABILITIES2_KHR.unwrap()(physicalDevice, pSurfaceInfo, pSurfaceCapabilities)
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn vkGetPhysicalDeviceSurfaceFormats2KHR(
-    physicalDevice: VkPhysicalDevice,
-    pSurfaceInfo: *const VkPhysicalDeviceSurfaceInfo2KHR,
-    pSurfaceFormatCount: *mut u32,
-    pSurfaceFormats: *mut VkSurfaceFormat2KHR,
-) -> VkResult {
-    VK_GET_PHYSICAL_DEVICE_SURFACE_FORMATS2_KHR.unwrap()(physicalDevice, pSurfaceInfo, pSurfaceFormatCount, pSurfaceFormats)
-}
-
-#[no_mangle]
 pub unsafe extern "C" fn vkGetPhysicalDeviceDisplayProperties2KHR(
     physicalDevice: VkPhysicalDevice,
     pPropertyCount: *mut u32,

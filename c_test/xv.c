@@ -249,7 +249,7 @@ int main() {
         .imageUsage=VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT,
         .preTransform=surfaceCapabilities.currentTransform,
         .compositeAlpha=surfaceCapabilities.supportedCompositeAlpha,
-        .presentMode=presentModes[0],
+        .presentMode=presentModes[1],
         .clipped=VK_TRUE,
         .oldSwapchain=NULL,
     };

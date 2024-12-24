@@ -43,6 +43,8 @@ static HIJACKED_FNS: LazyLock<HashMap<&CStr, PFN_vkVoidFunction>> = LazyLock::ne
         (c"vkGetPhysicalDeviceSurfaceCapabilitiesKHR", transmute(vkGetPhysicalDeviceSurfaceCapabilitiesKHR as *const usize)),
         (c"vkGetPhysicalDeviceSurfaceFormatsKHR", transmute(vkGetPhysicalDeviceSurfaceFormatsKHR as *const usize)),
         (c"vkGetPhysicalDeviceSurfacePresentModesKHR", transmute(vkGetPhysicalDeviceSurfacePresentModesKHR as *const usize)),
+        (c"vkGetPhysicalDeviceSurfaceCapabilities2KHR", transmute(vkGetPhysicalDeviceSurfaceCapabilities2KHR as *const usize)),
+        (c"vkGetPhysicalDeviceSurfaceFormats2KHR", transmute(vkGetPhysicalDeviceSurfaceFormats2KHR as *const usize)),
         // device
         (c"vkGetDeviceProcAddr", transmute(vkGetDeviceProcAddr as *const usize)),
         (c"vkCreateSwapchainKHR", transmute(vkCreateSwapchainKHR as *const usize)),
