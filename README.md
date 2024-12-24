@@ -9,8 +9,8 @@ Current implementation first copies VkImage inside the swapchain to a VkBuffer, 
 #### Programs
 ✅: Works fine.  
 🛠️: Tested, but not functioning well.  
-❌: Tested, but not workding or barely working.
-⏹️: Untested.
+❌: Tested, but not workding or barely working.  
+⏹️: Untested.  
 
 - ✅ xcb hello triangle
 - ✅ GLFW hello triangle

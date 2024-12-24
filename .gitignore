@@ -2,3 +2,4 @@ target
 libvulkan.so
 libvulkan.so.1
 log
+release
