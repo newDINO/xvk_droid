@@ -1,3 +1,9 @@
+## This project is no longer maintained due to the following reasons:
+1. There are too few softwares in Termux that need vulkan support.
+2. If this project is to support working inside proot or with glibc programs, the most stable solution may be using inter-process communication, which requires a lot of efforts and may not be very performant.
+3. There are some other open source drivers that works in Termux.
+
+
 ## XVK_DROID: Add X11 window surface support for Android Vulkan driver in Termux.
 
 ### Project stage
